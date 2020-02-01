@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta name="robots" content="noindex,nofollow">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+<title>景品申請</title>
+<script type="text/javascript">
+
+	function parse() {
+		// 最初の1文字 (?記号) を除いた文字列を取得する
+		var query = window.location.search.substring(1);
+		
+		try {
+			document.myForm.report.value = decodeURIComponent(query);
+		}
+		catch (e) {
+			alert("申請フォームの設定にエラーが発生しました。再読み込みしてみてください。");
+		}
+	}
+
+</script>
+</head>
+<body onload="parse();">
+景品申請
+
+<br>
+<form name="myForm">
+	<textarea cols="50" rows="10" name="report"></textarea>
+</form>
+
+<br><br><a href="../index.html">INDEX</a>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="robots" content="noindex,nofollow">
+    <meta charset='utf-8'>
+    <title>ダイス申請検証</title>
+    <script src="../game/param.js"></script>
+    <script src="../js/moment.js"></script>
+    <script src="../js/enchant.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="encryption.js"></script>
+</head>
+<body onload="preparation();">
+
+<form>
+<h3>暗号化⇔復号化</h3>
+<table cellpadding="5" cellspacing="0" border="0">
+    <tr>
+        <td>平文</td>
+        <td>：<input type="text" size="30" id="hi1" value=""></td>
+        <td><input type="button" value="平文⇒暗号文" onclick="encrypt(1)"></td>
+    </tr>
+    <tr>
+        <td>連勝回数</td>
+        <td>：<input type="text" size="30" id="ren"></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>暗号文「キー」</td>
+        <td>：<input type="text" size="30" id="an"></td>
+        <td><input type="button" value="暗号文⇒再平文" onclick="decrypt()"></td>
+    </tr>
+    <tr>
+        <td>鍵</td>
+        <td>：<input type="text" size="30" id="ka"></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>再平文「挑戦日時」</td>
+        <td>：<input type="text" size="30" id="hi2"></td>
+        <td></td>
+    </tr>
+</table>
+</form>
+
+<h3>復号方法</h3>
+<ul>
+    <li>encryption.htmlのscriptパスを確認する<br>
+        画面下部の鍵欄に鍵一覧が表示されてなければエラー。</li>
+    <li>景品応募メールの以下項目をそれぞれの入力項目に設定します。
+        <ul>
+            <li>連勝回数　→　「連勝回数」
+            </li>
+            <li>キー　→　「暗号文「キー」」
+            </li>
+        </ul>
+    </li>
+    <li>「暗号文⇒再平文」ボタンを押下します
+    </li>
+    <li>以下項目に値が表示されます。
+        <ul>
+            <li>鍵：暗号化時に使用した連勝回数に応じた2つめのキー<br>
+                下記に記してある、鍵の値と等しければOK。
+            </li>
+            <li>再平文「挑戦日時」：復号化した挑戦日時。<br>
+                メールに記載してある「挑戦日時」と等しければOK。
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<h3>鍵</h3>
+<ul>
+    <script type="text/javascript">
+        var txt = "";
+        for (var present of PRESENT_LIST) {
+            txt += "<dt>連勝"+ present.win + "</dt>";
+            txt += "<dd>"+ getEncryptKey(present.win) +"</dd>";
+        }
+        document.write(txt);
+    </script>
+</ul>
+
+</body>
+</html>
+
